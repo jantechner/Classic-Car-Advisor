@@ -1,9 +1,71 @@
 package com.drools.example
 
-rule "Hello World"
+import com.drools.example.UserAnswer
+import com.drools.example.Question
+import com.drools.example.Car
+import java.util.ArrayList
+import java.util.Arrays
+
+//rule "Hello World"
+//    when
+//        helloWorldObject: HelloWorld()
+//    then
+//        helloWorldObject.showMessage();
+//        System.out.print(" from Drools!");
+//end
+
+rule "Init"
     when
-        helloWorldObject: HelloWorld()
     then
-        helloWorldObject.showMessage();
-        System.out.print(" from Drools!");
+    ArrayList<UserAnswer> answers = new ArrayList<>();
+    answers.add(new UserAnswer("Reliability and convenience bore me"));
+    answers.add(new UserAnswer("I guess I'm making some kind of statement about something?"));
+    answers.add(new UserAnswer("New cars have no soul"));
+    answers.add(new UserAnswer("I prefer the style"));
+    answers.add(new UserAnswer("Love speed, hate safety"));
+    Question firstQuestion = new Question("Why do you want a classic?",
+    answers, new ArrayList<Car>());
+    insert(firstQuestion);
+end
+
+rule "Why do you want a classic?"
+    when
+        q : Question(content.equals("Why do you want a classic?"));
+    then
+        //Question window
+end
+
+rule "Why do you want a classic? - Reliability and convenience bore me"
+    when
+        q : Question(content.equals("Why do you want a classic?"));
+        a : UserAnswer(content.equals("Reliability and convenience bore me"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("I want to know how cars work"));
+        answers.add(new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders"));
+        insert(new Question("Oh yeah? Why's that?", answers, new ArrayList<Car>()));
+end
+
+rule "Oh yeah? Why's that? - I want to know how cars work"
+    when
+        q : Question(content.equals("Why do you want a classic?"));
+        a : UserAnswer(content.equals("I want to know how cars work"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Sounds good"));
+        answers.add(new UserAnswer("Not that archaic"));
+        answers.add(new UserAnswer("More archaic"));
+        insert(new Question("So, something really simple?", answers, new ArrayList<Car>()));
+end
+
+rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shoulders"
+    when
+        q : Question(content.equals("Why do you want a classic?"));
+        a : UserAnswer(content.equals("I'm erotically drawn to tow trucks and freeway shoulders"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Also really lovely"));
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Lotus Elan"));
+        insert(new Question("Ok. Should it be pretty quick?", answers, cars));
 end
