@@ -69,5 +69,10 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 <version>1.2.1</version>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java/com/drools/example/fxml</directory>
+            </resource>
+        </resources>
     </build>
 </project>

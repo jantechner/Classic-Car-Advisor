@@ -40,29 +40,19 @@ rule "Why do you want a classic?"
         System.out.println("Reliability and convenience bore me - answer added");
 end
 
+// Reliability and convenience bore me - branch 1/5
+
 rule "Why do you want a classic? - Reliability and convenience bore me"
     when
         q : Question(content.equals("Why do you want a classic?"));
         a : UserAnswer(content.equals("Reliability and convenience bore me"));
     then
         System.out.println("Reliability and convenience bore me - answer detected");
+
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("I want to know how cars work"));
         answers.add(new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders"));
         insert(new Question("Oh yeah? Why's that?", answers, new ArrayList<Car>()));
-end
-
-rule "Oh yeah? Why's that? - I want to know how cars work"
-    when
-        q : Question(content.equals("Why do you want a classic?"));
-        a : UserAnswer(content.equals("I want to know how cars work"));
-    then
-        System.out.println("I want to know how cars work - answer detected");
-        ArrayList<UserAnswer> answers = new ArrayList<>();
-        answers.add(new UserAnswer("Sounds good"));
-        answers.add(new UserAnswer("Not that archaic"));
-        answers.add(new UserAnswer("More archaic"));
-        insert(new Question("So, something really simple?", answers, new ArrayList<Car>()));
 end
 
 rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shoulders"
@@ -75,4 +65,67 @@ rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shou
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Lotus Elan"));
         insert(new Question("Ok. Should it be pretty quick?", answers, cars));
+end
+
+rule "Ok. Should it be pretty quick? - Also really lovely"
+    when
+        q : Question(content.equals("Ok. Should it be pretty quick?"));
+        a : UserAnswer(content.equals("Also really lovely"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("ALfa Romeo Giulia Super"));
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Oh yeah? Why's that? - I want to know how cars work"
+    when
+        q : Question(content.equals("Why do you want a classic?"));
+        a : UserAnswer(content.equals("I want to know how cars work"));
+    then
+        System.out.println("I want to know how cars work - answer detected");
+
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Sounds good"));
+        answers.add(new UserAnswer("Not that archaic"));
+        answers.add(new UserAnswer("More archaic"));
+        insert(new Question("So, something really simple?", answers, new ArrayList<Car>()));
+end
+
+rule "So, something really simple? - Sounds good"
+    when
+        q : Question(content.equals("So, something really simple?"));
+        a : UserAnswer(content.equals("Sounds good"));
+    then
+        System.out.println("Sounds good - answer detected");
+
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Citroen 2CV"));
+        cars.add(new Car("VW Thing"));
+        cars.add(new Car("Willys Jeep"));
+        cars.add(new Car("Honda Civic"));
+        insert(new Question("So, something really simple?", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "So, something really simple? - More archaic"
+    when
+        q : Question(content.equals("So, something really simple?"));
+        a : UserAnswer(content.equals("More archaic"));
+    then
+        System.out.println("More archaic - answer detected");
+
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Ford model T"));
+        insert(new Question("So, something really simple?", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "So, something really simple? - Not that archaic"
+    when
+        q : Question(content.equals("So, something really simple?"));
+        a : UserAnswer(content.equals("Not that archaic"));
+    then
+        System.out.println("Not that archaic");
+
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Ford model A"));
+        insert(new Question("So, something really simple?", new ArrayList<UserAnswer>(), cars));
 end
