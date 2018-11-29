@@ -60,6 +60,8 @@ rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shou
         q : Question(content.equals("Why do you want a classic?"));
         a : UserAnswer(content.equals("I'm erotically drawn to tow trucks and freeway shoulders"));
     then
+        System.out.println("I'm erotically drawn to tow trucks and freeway shoulders - answer detected");
+
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("Also really lovely"));
         ArrayList<Car> cars = new ArrayList<>();
@@ -72,6 +74,8 @@ rule "Ok. Should it be pretty quick? - Also really lovely"
         q : Question(content.equals("Ok. Should it be pretty quick?"));
         a : UserAnswer(content.equals("Also really lovely"));
     then
+        System.out.println("Also really lovely - answer detected");
+
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("ALfa Romeo Giulia Super"));
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
@@ -103,7 +107,7 @@ rule "So, something really simple? - Sounds good"
         cars.add(new Car("VW Thing"));
         cars.add(new Car("Willys Jeep"));
         cars.add(new Car("Honda Civic"));
-        insert(new Question("So, something really simple?", new ArrayList<UserAnswer>(), cars));
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
 rule "So, something really simple? - More archaic"
@@ -115,7 +119,7 @@ rule "So, something really simple? - More archaic"
 
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Ford model T"));
-        insert(new Question("So, something really simple?", new ArrayList<UserAnswer>(), cars));
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
 rule "So, something really simple? - Not that archaic"
@@ -123,9 +127,82 @@ rule "So, something really simple? - Not that archaic"
         q : Question(content.equals("So, something really simple?"));
         a : UserAnswer(content.equals("Not that archaic"));
     then
-        System.out.println("Not that archaic");
+        System.out.println("Not that archaic - answer detected");
 
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Ford model A"));
-        insert(new Question("So, something really simple?", new ArrayList<UserAnswer>(), cars));
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+// I guess I'm making some kind of statement about something? - branch 2/5
+
+rule "Why do you want a classic? - I guess I'm making some kind of statement about something?"
+    when
+        q : Question(content.equals("Why do you want a classic?"));
+        a : UserAnswer(content.equals("I guess I'm making some kind of statement about something?"));
+    then
+        System.out.println("I guess I'm making some kind of statement about something? - answer detected");
+
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("I'm really rich but like to pretend I'm still a hippie"));
+        answers.add(new UserAnswer("The mothership left me in Paris"));
+        answers.add(new UserAnswer("I run an NYC-themed diner in Las Vegas"));
+        answers.add(new UserAnswer("I live dangerously and Nader can suck it"));
+        answers.add(new UserAnswer("I will only drive vehicles with two distinct luggage areas"));
+        answers.add(new UserAnswer("I'm a kook. An american kook."));
+        answers.add(new UserAnswer("I take driving seriously and have the gloves to prove it"));
+        answers.add(new UserAnswer("My wallet is on a chain"));
+        answers.add(new UserAnswer("I'm a refugee from an alternate future with zeppelins and shit"));
+        answers.add(new UserAnswer("I like being part of a massive automotive subculture"));
+        answers.add(new UserAnswer("I hate people knowing what i drive"));
+        answers.add(new UserAnswer("I kinda wanted a motorcycle, but i have no balance"));
+        insert(new Question("Great, what kind of statement?", answers, new ArrayList<Car>()));
+end
+
+rule "Great, what kind of statement? - I'm really rich but like to pretend I'm still a hippie"
+when
+    q : Question(content.equals("Great, what kind of statement?"));
+    a : UserAnswer(content.equals("I'm really rich but like to pretend I'm still a hippie"));
+then
+    System.out.println("I'm really rich but like to pretend I'm still a hippie - answer detected");
+
+    ArrayList<Car> cars = new ArrayList<>();
+    cars.add(new Car("VW type 2 microbus"));
+    insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - The mothership left me in Paris"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("The mothership left me in Paris"));
+   then
+        System.out.println("The mothership left me in Paris - answer detected");
+
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Citroen SM"));
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - I run an NYC-themed diner in Las Vegas"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I run an NYC-themed diner in Las Vegas"));
+    then
+        System.out.println("I run an NYC-themed diner in Las Vegas - answer detected");
+
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Checker Marathon"));
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - I live dangerously and Nader can suck it"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I live dangerously and Nader can suck it"));
+    then
+        System.out.println("I live dangerously and Nader can suck it - answer detected");
+
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Chevy Corvair"));
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
