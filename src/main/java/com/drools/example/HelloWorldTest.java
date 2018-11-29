@@ -1,6 +1,5 @@
 package com.drools.example;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -11,10 +10,10 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 public class HelloWorldTest {
-//    public static void main(String[] args) throws DroolsParserException, IOException {
-//        HelloWorldTest helloWorldTest = new HelloWorldTest();
-//        helloWorldTest.executeHelloWorldRules();
-//    }
+    public static void main(String[] args) throws DroolsParserException, IOException {
+        HelloWorldTest helloWorldTest = new HelloWorldTest();
+        helloWorldTest.executeHelloWorldRules();
+    }
 
     public void executeHelloWorldRules() throws IOException, DroolsParserException {
         KieServices ks = KieServices.Factory.get();

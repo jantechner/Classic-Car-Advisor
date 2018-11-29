@@ -1,18 +1,19 @@
 package com.drools.example
 
+import com.drools.example.HelloWorld
 import com.drools.example.UserAnswer
 import com.drools.example.Question
 import com.drools.example.Car
 import java.util.ArrayList
 import java.util.Arrays
 
-//rule "Hello World"
-//    when
-//        helloWorldObject: HelloWorld()
-//    then
-//        helloWorldObject.showMessage();
-//        System.out.print(" from Drools!");
-//end
+rule "Hello World"
+    when
+        helloWorldObject: HelloWorld()
+    then
+        helloWorldObject.showMessage();
+        System.out.print(" from Drools!");
+end
 
 rule "Init"
     when
@@ -26,6 +27,7 @@ rule "Init"
     Question firstQuestion = new Question("Why do you want a classic?",
     answers, new ArrayList<Car>());
     insert(firstQuestion);
+    System.out.println("Init rule fired - first question added");
 end
 
 rule "Why do you want a classic?"
@@ -33,6 +35,9 @@ rule "Why do you want a classic?"
         q : Question(content.equals("Why do you want a classic?"));
     then
         //Question window
+
+        insert(new UserAnswer("Reliability and convenience bore me"));
+        System.out.println("Reliability and convenience bore me - answer added");
 end
 
 rule "Why do you want a classic? - Reliability and convenience bore me"
@@ -40,6 +45,7 @@ rule "Why do you want a classic? - Reliability and convenience bore me"
         q : Question(content.equals("Why do you want a classic?"));
         a : UserAnswer(content.equals("Reliability and convenience bore me"));
     then
+        System.out.println("Reliability and convenience bore me - answer detected");
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("I want to know how cars work"));
         answers.add(new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders"));
@@ -51,6 +57,7 @@ rule "Oh yeah? Why's that? - I want to know how cars work"
         q : Question(content.equals("Why do you want a classic?"));
         a : UserAnswer(content.equals("I want to know how cars work"));
     then
+        System.out.println("I want to know how cars work - answer detected");
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("Sounds good"));
         answers.add(new UserAnswer("Not that archaic"));
