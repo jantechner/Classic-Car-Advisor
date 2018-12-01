@@ -1,64 +1,76 @@
 package com.drools.example
+import java.util.ArrayList
 
+import com.drools.example.controllers.QuestionViewController
 import com.drools.example.HelloWorld
 import com.drools.example.UserAnswer
 import com.drools.example.Question
 import com.drools.example.Car
 import java.util.ArrayList
 import java.util.Arrays
+import org.kie.api.task.model.User
 
-rule "Hello World"
-    when
-        helloWorldObject: HelloWorld()
-    then
-        helloWorldObject.showMessage();
-        System.out.print(" from Drools!");
-end
+
 
 rule "Init"
     when
     then
+    System.out.println("Init rule fired - first question added");
+
     ArrayList<UserAnswer> answers = new ArrayList<>();
     answers.add(new UserAnswer("Reliability and convenience bore me"));
     answers.add(new UserAnswer("I guess I'm making some kind of statement about something?"));
     answers.add(new UserAnswer("New cars have no soul"));
     answers.add(new UserAnswer("I prefer the style"));
     answers.add(new UserAnswer("Love speed, hate safety"));
-    Question firstQuestion = new Question("Why do you want a classic?",
-    answers, new ArrayList<Car>());
+    Question firstQuestion = new Question("Why do you want a classic?", answers, new ArrayList<Car>());
+
     insert(firstQuestion);
-    System.out.println("Init rule fired - first question added");
 end
 
-rule "Why do you want a classic?"
+rule "Show question with possible answers"
     when
-        q : Question(content.equals("Why do you want a classic?"));
+        q : Question();
     then
-        //Question window
 
-        insert(new UserAnswer("Reliability and convenience bore me"));
-        System.out.println("Reliability and convenience bore me - answer added");
+        System.out.println("Q: " + q.content);
+        System.out.println();
+        for (UserAnswer answer: q.answers){
+            System.out.println(answer.content);
+        }
+        System.out.println();
+        System.out.println("Wait for user answer...");
+        System.out.println();
+        UserAnswer ua = new UserAnswer("Reliability and convenience bore me");
+        UserAnswer ua1 = new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders");
+        insertLogical(ua);
+        insertLogical(ua1);
 end
 
 // Reliability and convenience bore me - branch 1/5
 
 rule "Why do you want a classic? - Reliability and convenience bore me"
     when
-        q : Question(content.equals("Why do you want a classic?"));
-        a : UserAnswer(content.equals("Reliability and convenience bore me"));
+        q : Question(content == "Why do you want a classic?");
+        a : UserAnswer(content == "Reliability and convenience bore me");
     then
+        System.out.println("Question: " + q.content);
         System.out.println("Reliability and convenience bore me - answer detected");
 
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("I want to know how cars work"));
         answers.add(new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders"));
+
+        retract(a)
+        retract(q)
+
         insert(new Question("Oh yeah? Why's that?", answers, new ArrayList<Car>()));
 end
 
 rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shoulders"
     when
-        q : Question(content.equals("Why do you want a classic?"));
-        a : UserAnswer(content.equals("I'm erotically drawn to tow trucks and freeway shoulders"));
+        q : Question(content == "Oh yeah? Why's that?");
+        a : UserAnswer(content == "I'm erotically drawn to tow trucks and freeway shoulders");
     then
         System.out.println("I'm erotically drawn to tow trucks and freeway shoulders - answer detected");
 
@@ -66,6 +78,10 @@ rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shou
         answers.add(new UserAnswer("Also really lovely"));
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Lotus Elan"));
+
+        retract(a)
+        retract(q)
+
         insert(new Question("Ok. Should it be pretty quick?", answers, cars));
 end
 

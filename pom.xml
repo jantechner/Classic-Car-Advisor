@@ -52,6 +52,16 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>11</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -69,10 +79,10 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 <version>1.2.1</version>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/java/com/drools/example/fxml</directory>
-            </resource>
-        </resources>
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>src/main/java/com/drools/example/fxml</directory>-->
+            <!--</resource>-->
+        <!--</resources>-->
     </build>
 </project>
