@@ -23,9 +23,8 @@ rule "Init"
     answers.add(new UserAnswer("New cars have no soul"));
     answers.add(new UserAnswer("I prefer the style"));
     answers.add(new UserAnswer("Love speed, hate safety"));
-    Question firstQuestion = new Question("Why do you want a classic?", answers, new ArrayList<Car>());
 
-    insert(firstQuestion);
+    insert(new Question("Why do you want a classic?", answers, new ArrayList<Car>()));
 end
 
 rule "Show question with possible answers"
@@ -41,10 +40,10 @@ rule "Show question with possible answers"
         System.out.println();
         System.out.println("Wait for user answer...");
         System.out.println();
-        UserAnswer ua = new UserAnswer("Reliability and convenience bore me");
-        UserAnswer ua1 = new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders");
-        insertLogical(ua);
-        insertLogical(ua1);
+//        UserAnswer ua = new UserAnswer("Reliability and convenience bore me");
+//        UserAnswer ua1 = new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders");
+//        insertLogical(ua);
+//        insertLogical(ua1);
 end
 
 // Reliability and convenience bore me - branch 1/5
@@ -54,16 +53,11 @@ rule "Why do you want a classic? - Reliability and convenience bore me"
         q : Question(content == "Why do you want a classic?");
         a : UserAnswer(content == "Reliability and convenience bore me");
     then
-        System.out.println("Question: " + q.content);
-        System.out.println("Reliability and convenience bore me - answer detected");
-
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("I want to know how cars work"));
         answers.add(new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders"));
-
-        retract(a)
-        retract(q)
-
+//        retract(a)
+//        retract(q)
         insert(new Question("Oh yeah? Why's that?", answers, new ArrayList<Car>()));
 end
 
@@ -72,16 +66,12 @@ rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shou
         q : Question(content == "Oh yeah? Why's that?");
         a : UserAnswer(content == "I'm erotically drawn to tow trucks and freeway shoulders");
     then
-        System.out.println("I'm erotically drawn to tow trucks and freeway shoulders - answer detected");
-
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("Also really lovely"));
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Lotus Elan"));
-
-        retract(a)
-        retract(q)
-
+//        retract(a)
+//        retract(q)
         insert(new Question("Ok. Should it be pretty quick?", answers, cars));
 end
 
@@ -90,8 +80,6 @@ rule "Ok. Should it be pretty quick? - Also really lovely"
         q : Question(content.equals("Ok. Should it be pretty quick?"));
         a : UserAnswer(content.equals("Also really lovely"));
     then
-        System.out.println("Also really lovely - answer detected");
-
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("ALfa Romeo Giulia Super"));
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
@@ -102,8 +90,6 @@ rule "Oh yeah? Why's that? - I want to know how cars work"
         q : Question(content.equals("Why do you want a classic?"));
         a : UserAnswer(content.equals("I want to know how cars work"));
     then
-        System.out.println("I want to know how cars work - answer detected");
-
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("Sounds good"));
         answers.add(new UserAnswer("Not that archaic"));
@@ -116,8 +102,6 @@ rule "So, something really simple? - Sounds good"
         q : Question(content.equals("So, something really simple?"));
         a : UserAnswer(content.equals("Sounds good"));
     then
-        System.out.println("Sounds good - answer detected");
-
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Citroen 2CV"));
         cars.add(new Car("VW Thing"));
@@ -131,8 +115,6 @@ rule "So, something really simple? - More archaic"
         q : Question(content.equals("So, something really simple?"));
         a : UserAnswer(content.equals("More archaic"));
     then
-        System.out.println("More archaic - answer detected");
-
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Ford model T"));
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
@@ -143,8 +125,6 @@ rule "So, something really simple? - Not that archaic"
         q : Question(content.equals("So, something really simple?"));
         a : UserAnswer(content.equals("Not that archaic"));
     then
-        System.out.println("Not that archaic - answer detected");
-
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Ford model A"));
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
@@ -157,8 +137,6 @@ rule "Why do you want a classic? - I guess I'm making some kind of statement abo
         q : Question(content.equals("Why do you want a classic?"));
         a : UserAnswer(content.equals("I guess I'm making some kind of statement about something?"));
     then
-        System.out.println("I guess I'm making some kind of statement about something? - answer detected");
-
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("I'm really rich but like to pretend I'm still a hippie"));
         answers.add(new UserAnswer("The mothership left me in Paris"));
@@ -180,8 +158,6 @@ when
     q : Question(content.equals("Great, what kind of statement?"));
     a : UserAnswer(content.equals("I'm really rich but like to pretend I'm still a hippie"));
 then
-    System.out.println("I'm really rich but like to pretend I'm still a hippie - answer detected");
-
     ArrayList<Car> cars = new ArrayList<>();
     cars.add(new Car("VW type 2 microbus"));
     insert(new Question("", new ArrayList<UserAnswer>(), cars));
@@ -192,8 +168,6 @@ rule "Great, what kind of statement? - The mothership left me in Paris"
         q : Question(content.equals("Great, what kind of statement?"));
         a : UserAnswer(content.equals("The mothership left me in Paris"));
    then
-        System.out.println("The mothership left me in Paris - answer detected");
-
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Citroen SM"));
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
@@ -204,8 +178,6 @@ rule "Great, what kind of statement? - I run an NYC-themed diner in Las Vegas"
         q : Question(content.equals("Great, what kind of statement?"));
         a : UserAnswer(content.equals("I run an NYC-themed diner in Las Vegas"));
     then
-        System.out.println("I run an NYC-themed diner in Las Vegas - answer detected");
-
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Checker Marathon"));
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
@@ -216,8 +188,6 @@ rule "Great, what kind of statement? - I live dangerously and Nader can suck it"
         q : Question(content.equals("Great, what kind of statement?"));
         a : UserAnswer(content.equals("I live dangerously and Nader can suck it"));
     then
-        System.out.println("I live dangerously and Nader can suck it - answer detected");
-
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Chevy Corvair"));
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
