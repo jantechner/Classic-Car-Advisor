@@ -26,4 +26,9 @@ public class Session {
         session.fireAllRules();
     }
 
+    public static void resetSession(){
+        session.destroy();
+        init();
+    }
+
 }

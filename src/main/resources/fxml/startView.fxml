@@ -15,9 +15,9 @@
         <Image url="@../bg.png" />
       </image>
     </ImageView>
-    <Button id="startButton" layoutX="388.0" layoutY="263.0" mnemonicParsing="false" onAction="#runAdvisor" text="START" textAlignment="CENTER">
+    <Button id="startButton" layoutX="394.0" layoutY="268.0" mnemonicParsing="false" onAction="#runAdvisor" text="START" textAlignment="LEFT">
       <font>
-        <Font size="46.0" />
+        <Font name="System Bold" size="40.0" />
       </font>
     </Button>
   </children>

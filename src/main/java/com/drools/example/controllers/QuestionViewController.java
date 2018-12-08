@@ -73,7 +73,6 @@ public class QuestionViewController {
         }
     }
 
-
     private void chooseAnswer(UserAnswer answer) {
 //        System.out.println("Chosen answer: " + answer.content);
         Session.insertAnswer(answer);
@@ -82,6 +81,13 @@ public class QuestionViewController {
     private void chooseResult(Car car) {
 //        System.out.println("Chosen car: " + car.name);
         this.yourChoice.setText("Your choice: " + car.name);
+    }
+
+    public void reset() {
+        Session.resetSession();
+        Session.insertController(this);
+        Session.session.fireAllRules();
+        this.yourChoice.setText("");
     }
 
 }

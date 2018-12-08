@@ -517,7 +517,7 @@ end
 
 rule "A huge, fast FWD sofa? - Yes"
     when
-        q : Question(content.equals("What does soul mean to you?"));
+        q : Question(content.equals("A huge, fast FWD sofa?"));
         a : UserAnswer(content.equals("Yes"));
     then
         ArrayList<Car> cars = new ArrayList<>();

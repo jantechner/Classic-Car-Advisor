@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,7 +22,7 @@
       </font>
     </Label>
     <VBox fx:id="answerBox" layoutX="55.0" layoutY="121.0" prefHeight="380.0" prefWidth="480.0" />
-    <VBox id="answerBox" fx:id="resultBox" layoutY="121.0" prefHeight="380.0" prefWidth="278.0" AnchorPane.rightAnchor="54.0" />
+    <VBox id="answerBox" fx:id="resultBox" layoutY="120.0" prefHeight="380.0" prefWidth="278.0" AnchorPane.rightAnchor="54.0" />
     <Label id="questionText" alignment="CENTER" contentDisplay="CENTER" font="$x1" layoutX="242.0" layoutY="85.0" text="Answers" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" underline="false" wrapText="true" />
     <Label id="questionText" alignment="CENTER" contentDisplay="CENTER" font="$x1" layoutX="755.0" layoutY="85.0" text="Results" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" underline="false" wrapText="true" />
     <Label id="questionText" fx:id="yourChoice" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="500.0" prefHeight="86.0" prefWidth="500.0" text="" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" underline="false" wrapText="true">
@@ -29,5 +30,20 @@
         <Font name="System Bold" size="24.0" />
       </font>
     </Label>
+    <Button layoutX="854.0" layoutY="526.0" mnemonicParsing="false" onAction="#reset" opacity="1.0" prefHeight="34.0" prefWidth="92.0" style="" text="Reset" textFill="BLACK" visible="true">
+      <effect>
+        <Lighting diffuseConstant="1.425196850393701" specularConstant="1.6385826771653544" specularExponent="40.0" surfaceScale="0.0">
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <light>
+            <javafx.scene.effect.Light.Distant color="#ff3333" />
+          </light>
+        </Lighting>
+      </effect>
+      <font>
+        <Font name="System Bold" size="18.0" />
+      </font>
+    </Button>
   </children>
 </AnchorPane>
