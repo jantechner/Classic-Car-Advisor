@@ -376,3 +376,205 @@ rule "Great, what kind of statement? - I kinda wanted a motorcycle, but i have n
 end
 
 // New cars have no soul - branch 3/5
+
+rule "Why do you want a classic? - New cars have no soul"
+    when
+        q : Question(content == "Why do you want a classic?");
+        a : UserAnswer(content == "New cars have no soul");
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Easy: ability to drive off a pier into an estuary"));
+        answers.add(new UserAnswer("Synonym for weird"));
+        answers.add(new UserAnswer("Technically novel"));
+        answers.add(new UserAnswer("Soul means the car had an honest job, like a cop or cabbie"));
+        answers.add(new UserAnswer("It means riding in it is like sitting on a sofa"));
+        answers.add(new UserAnswer("It means the car is often starring in movies"));
+        answers.add(new UserAnswer("It could mean pure evil?"));
+        answers.add(new UserAnswer("Soul is the spirits of 43 dead clowns haunting the car"));
+        answers.add(new UserAnswer("Soul is the ability to go a million miles with SU carbs and Lucas electrics"));
+        retract(a)
+        retract(q)
+        insert(new Question("What does soul mean to you?", answers, new ArrayList<Car>()));
+end
+
+rule "What does soul mean to you? - Easy: ability to drive off a pier into an estuary"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("Easy: ability to drive off a pier into an estuary"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Amphicar"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "What does soul mean to you? - Synonym for weird"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("Synonym for weird"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("BMW Isetta"));
+        cars.add(new Car("Messerschmidt Kabinroller"));
+        cars.add(new Car("Subaru 360"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "What does soul mean to you? - Technically novel"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("Technically novel"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Instead of pistons, some metal hamantaschen"));
+        answers.add(new UserAnswer("Can burn cooking oil"));
+        answers.add(new UserAnswer("Engine in the wrong place (maybe colled by wrong stuff)"));
+        answers.add(new UserAnswer("They thought they were building a plane"));
+        retract(a)
+        retract(q)
+        insert(new Question("Like what?", answers, new ArrayList<Car>()));
+end
+
+rule "Like what? - Instead of pistons, some metal hamantaschen"
+    when
+        q : Question(content.equals("Like what?"));
+        a : UserAnswer(content.equals("Instead of pistons, some metal hamantaschen"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Mazdra RX-7"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Like what? - Can burn cooking oil"
+    when
+        q : Question(content.equals("Like what?"));
+        a : UserAnswer(content.equals("Can burn cooking oil"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Mercedes Benz 300TD"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Like what? - Engine in the wrong place (maybe colled by wrong stuff)"
+    when
+        q : Question(content.equals("Like what?"));
+        a : UserAnswer(content.equals("Engine in the wrong place (maybe colled by wrong stuff)"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Porsche 912"));
+        cars.add(new Car("Renault Alpine"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Like what? - They thought they were building a plane"
+    when
+        q : Question(content.equals("Like what?"));
+        a : UserAnswer(content.equals("They thought they were building a plane"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Saab 96"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "What does soul mean to you? - Soul means the car had an honest job, like a cop or cabbie"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("Soul means the car had an honest job, like a cop or cabbie"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Ford Crown Vic"));
+        cars.add(new Car("Dodge Monaco"));
+        cars.add(new Car("Chevy Caprice"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "What does soul mean to you? - It means riding in it is like sitting on a sofa"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("It means riding in it is like sitting on a sofa"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Yes"));
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Lincoln Town Car"));
+        retract(a)
+        retract(q)
+        insert(new Question("A huge, fast FWD sofa?", answers, cars));
+end
+
+rule "A huge, fast FWD sofa? - Yes"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("Yes"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Olds Tornado"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "What does soul mean to you? - It means the car is often starring in movies"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("It means the car is often starring in movies"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("VW Beetle"));
+        cars.add(new Car("Delorean DMC-12"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "What does soul mean to you? - It could mean pure evil?"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("It could mean pure evil?"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Plymouth Fury"));
+        cars.add(new Car("Buick GNX"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "What does soul mean to you? - Soul is the spirits of 43 dead clowns haunting the car"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("Soul is the spirits of 43 dead clowns haunting the car"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Nash Metropolitan"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "What does soul mean to you? - Soul is the ability to go a million miles with SU carbs and Lucas electrics"
+    when
+        q : Question(content.equals("What does soul mean to you?"));
+        a : UserAnswer(content.equals("Soul is the ability to go a million miles with SU carbs and Lucas electrics"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Volvo P1800"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+// I prefer the style - branch 4/5
