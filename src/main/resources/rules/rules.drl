@@ -2,7 +2,6 @@ package com.drools.example
 import java.util.ArrayList
 
 import com.drools.example.controllers.QuestionViewController
-import com.drools.example.HelloWorld
 import com.drools.example.UserAnswer
 import com.drools.example.Question
 import com.drools.example.Car
@@ -27,24 +26,31 @@ rule "Init"
     insert(new Question("Why do you want a classic?", answers, new ArrayList<Car>()));
 end
 
+
+
+
+
 rule "Show question with possible answers"
     when
         q : Question();
+        qvc : QuestionViewController();
     then
+//        QuestionViewController.updateQuestion(q);
+//        System.out.println("Q: " + q.content + "\n");
+//        for (UserAnswer answer: q.answers){
+//            System.out.println(answer.content);
+//        }
+        qvc.updateLabel(q);
 
-        System.out.println("Q: " + q.content);
-        System.out.println();
-        for (UserAnswer answer: q.answers){
-            System.out.println(answer.content);
-        }
-        System.out.println();
-        System.out.println("Wait for user answer...");
-        System.out.println();
 //        UserAnswer ua = new UserAnswer("Reliability and convenience bore me");
 //        UserAnswer ua1 = new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders");
 //        insertLogical(ua);
 //        insertLogical(ua1);
 end
+
+
+
+
 
 // Reliability and convenience bore me - branch 1/5
 

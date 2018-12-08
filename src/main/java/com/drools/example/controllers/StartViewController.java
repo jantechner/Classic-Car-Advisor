@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -16,20 +17,25 @@ public class StartViewController {
     @FXML
     private AnchorPane pane;
 
+    @FXML
+    private Label questionContent;
     public void runAdvisor() {
 
         System.out.println("Start button pressed");
-        Session.session.fireAllRules();
+
 
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/questionView.fxml"));
-            pane = loader.load();
-            Scene scene = new Scene(pane);
-            stage.setScene(scene);
+            Scene scene = new Scene(loader.load());
 
+            Session.insertController(loader.getController());
+
+            stage.setScene(scene);
+            Session.session.fireAllRules();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
