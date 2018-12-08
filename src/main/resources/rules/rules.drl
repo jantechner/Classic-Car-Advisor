@@ -51,8 +51,7 @@ rule "Why do you want a classic? - Reliability and convenience bore me"
         insert(new Question("Oh yeah? Why's that?", answers, new ArrayList<Car>()));
 end
 
-rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shoulders"
-    when
+rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shoulders"    when
         q : Question(content == "Oh yeah? Why's that?");
         a : UserAnswer(content == "I'm erotically drawn to tow trucks and freeway shoulders");
     then
@@ -578,3 +577,364 @@ rule "What does soul mean to you? - Soul is the ability to go a million miles wi
 end
 
 // I prefer the style - branch 4/5
+
+rule "Why do you want a classic? - I prefer the style"
+     when
+         q : Question(content == "Why do you want a classic?");
+         a : UserAnswer(content == "I prefer the style");
+     then
+         ArrayList<UserAnswer> answers = new ArrayList<>();
+         answers.add(new UserAnswer("African dictator"));
+         answers.add(new UserAnswer("I love corvairs but live in a 3/4 scale universe"));
+         answers.add(new UserAnswer("Like Buick Roger's boss's dad"));
+         answers.add(new UserAnswer("I love chrome and loud shirts"));
+         answers.add(new UserAnswer("Really slow cars that look fast"));
+         answers.add(new UserAnswer("I love brass and lanterns"));
+         answers.add(new UserAnswer("I can only drive cars hat are museum-worthy"));
+         answers.add(new UserAnswer("Working class hero, also beer"));
+         answers.add(new UserAnswer("Old farmer with no family"));
+         answers.add(new UserAnswer("Classic german with a touch of pedal confusion"));
+         retract(a)
+         retract(q)
+         insert(new Question("OK, what kind of style?", answers, new ArrayList<Car>()));
+     end
+
+rule "OK, what kind of style? - African dictator"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("African dictator"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Mercedes-Benz 600"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - I love corvairs but live in a 3/4 scale universe"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("I love corvairs but live in a 3/4 scale universe"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("NSU Prinz"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - Like Buick Roger's boss's dad"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("Like Buick Roger's boss's dad"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("'59 Cadillac ElDorado"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - I love chrome and loud shirts"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("I love chrome and loud shirts"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("'57 Chevy Bel Air"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - Really slow cars that look fast"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("Really slow cars that look fast"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Opel GT"));
+        cars.add(new Car("VW Karmann Ghia"));
+        cars.add(new Car("Renault Floride"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - I love brass and lanterns"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("I love brass and lanterns"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Anything pre WW II"));
+        cars.add(new Car("Maybe a Packard"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - I can only drive cars hat are museum-worthy"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("I can only drive cars hat are museum-worthy"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Citroen DS"));
+        cars.add(new Car("Lamborghini Miura"));
+        cars.add(new Car("Cord 812"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - Working class hero, also beer"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("Working class hero, also beer"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Noise and smoke"));
+        answers.add(new UserAnswer("Noise, smoke and the Trailer park's undying respect"));
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Ford Mustang"));
+        retract(a)
+        retract(q)
+        insert(new Question("What do you want from tires?", answers, cars));
+end
+rule "What do you want from tires? - Noise and smoke"
+    when
+        q : Question(content.equals("What do you want from tires?"));
+        a : UserAnswer(content.equals("Noise and smoke"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Ford Mustang Mach I"));
+        cars.add(new Car("Chevy C3 Corvette"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+rule "What do you want from tires? - Noise, smoke and the Trailer park's undying respect"
+    when
+        q : Question(content.equals("What do you want from tires?"));
+        a : UserAnswer(content.equals("Noise, smoke and the Trailer park's undying respect"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Fox body Mustang"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - Old farmer with no family"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("Old farmer with no family"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Dammit, I lost my hat"));
+        answers.add(new UserAnswer("So it does, friend"));
+        retract(a)
+        retract(q)
+        insert(new Question("Does your hat say you'd rather push a chevy?", answers, new ArrayList<Car>()));
+end
+rule "Does your hat say you'd rather push a chevy? - Dammit, I lost my hat"
+    when
+        q : Question(content.equals("Does your hat say you'd rather push a chevy?"));
+        a : UserAnswer(content.equals("Dammit, I lost my hat"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("AMC AMX"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+rule "Does your hat say you'd rather push a chevy? - So it does, friend"
+    when
+        q : Question(content.equals("Does your hat say you'd rather push a chevy?"));
+        a : UserAnswer(content.equals("So it does, friend"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Chevy Camaro"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "OK, what kind of style? - Classic german with a touch of pedal confusion"
+    when
+        q : Question(content.equals("OK, what kind of style?"));
+        a : UserAnswer(content.equals("Classic german with a touch of pedal confusion"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Audi 100"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+// Love speed, hate safety  - branch 5/5
+
+rule "Why do you want a classic? - Love speed, hate safety"
+    when
+        q : Question(content == "Why do you want a classic?");
+        a : UserAnswer(content == "Love speed, hate safety");
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("I love speed and money"));
+        answers.add(new UserAnswer("I have a death wish"));
+        answers.add(new UserAnswer("Fake is fine"));
+        answers.add(new UserAnswer("Fast and cheap"));
+        retract(a)
+        retract(q)
+        insert(new Question("Real speed or just feel speedy?", answers, new ArrayList<Car>()));
+    end
+
+rule "Real speed or just feel speedy? - I love speed and money"
+    when
+        q : Question(content == "Real speed or just feel speedy?");
+        a : UserAnswer(content == "I love speed and money");
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Some kind of duke and I rally"));
+        answers.add(new UserAnswer("My goal is to drive my childhood bedroom posters"));
+        answers.add(new UserAnswer("I have a weird fetish where I like people asking 'Is it a replica?'"));
+        retract(a)
+        retract(q)
+        insert(new Question("Great, who are you?", answers, new ArrayList<Car>()));
+    end
+
+rule "Great, who are you? - Some kind of duke and I rally"
+    when
+        q : Question(content.equals("Great, who are you?"));
+        a : UserAnswer(content.equals("Some kind of duke and I rally"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Lancia Stratos"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+rule "Great, who are you? - My goal is to drive my childhood bedroom posters"
+    when
+        q : Question(content.equals("Great, who are you?"));
+        a : UserAnswer(content.equals("My goal is to drive my childhood bedroom posters"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Lamborghini Countach"));
+        cars.add(new Car("Ferrari 250 GTO"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+rule "Great, who are you? - I have a weird fetish where I like people asking 'Is it a replica?'"
+    when
+        q : Question(content.equals("Great, who are you?"));
+        a : UserAnswer(content.equals("I have a weird fetish where I like people asking 'Is it a replica?'"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("AC Cobra"));
+        cars.add(new Car("Porsche 356 Speedster"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Real speed or just feel speedy? - I have a death wish"
+    when
+        q : Question(content == "Real speed or just feel speedy?");
+        a : UserAnswer(content == "I have a death wish");
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Crushed by V8 in tiny space"));
+        answers.add(new UserAnswer("Run out of talent, off cliff"));
+        answers.add(new UserAnswer("Car, tree"));
+        answers.add(new UserAnswer("Blaze of glory"));
+        answers.add(new UserAnswer("Electrocuted by wiper switch"));
+        retract(a)
+        retract(q)
+        insert(new Question("How do you want to go?", answers, new ArrayList<Car>()));
+end
+
+rule "How do you want to go? - Crushed by V8 in tiny space"
+    when
+        q : Question(content.equals("How do you want to go?"));
+        a : UserAnswer(content.equals("Crushed by V8 in tiny space"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Sunbeam Tiger"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+rule "How do you want to go? - Run out of talent, off cliff"
+    when
+        q : Question(content.equals("How do you want to go?"));
+        a : UserAnswer(content.equals("Run out of talent, off cliff"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Porsche Spyder"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+rule "How do you want to go? - Car, tree"
+    when
+        q : Question(content.equals("How do you want to go?"));
+        a : UserAnswer(content.equals("Car, tree"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Camaro IROC-Z"));
+        cars.add(new Car("Plymouth Road Runner"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+rule "How do you want to go? - Blaze of glory"
+    when
+        q : Question(content.equals("How do you want to go?"));
+        a : UserAnswer(content.equals("Blaze of glory"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Ferrari Testarossa"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+rule "How do you want to go? - Electrocuted by wiper switch"
+    when
+        q : Question(content.equals("How do you want to go?"));
+        a : UserAnswer(content.equals("Electrocuted by wiper switch"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Jaguar E-TYPE"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Real speed or just feel speedy? - Fake is fine"
+    when
+        q : Question(content.equals("Real speed or just feel speedy?"));
+        a : UserAnswer(content.equals("Fake is fine"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Datsun 510"));
+        cars.add(new Car("Mini Cooper"));
+        cars.add(new Car("Mk1 VW Golf GTI"));
+        cars.add(new Car("Honda CRX"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Real speed or just feel speedy? - Fast and cheap"
+    when
+        q : Question(content.equals("Real speed or just feel speedy?"));
+        a : UserAnswer(content.equals("Fast and cheap"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Dodge Omni GLH"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
