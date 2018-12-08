@@ -67,36 +67,42 @@ end
 
 rule "Ok. Should it be pretty quick? - Also really lovely"
     when
-        q : Question(content.equals("Ok. Should it be pretty quick?"));
-        a : UserAnswer(content.equals("Also really lovely"));
+        q : Question(content == "Ok. Should it be pretty quick?");
+        a : UserAnswer(content == "Also really lovely");
     then
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Alfa Romeo Giulia Super"));
+        retract(a)
+        retract(q)
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
 rule "Oh yeah? Why's that? - I want to know how cars work"
     when
-        q : Question(content.equals("Why do you want a classic?"));
-        a : UserAnswer(content.equals("I want to know how cars work"));
+        q : Question(content == "Oh yeah? Why's that?");
+        a : UserAnswer(content == "I want to know how cars work");
     then
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("Sounds good"));
-        answers.add(new UserAnswer("Not that archaic"));
         answers.add(new UserAnswer("More archaic"));
+        answers.add(new UserAnswer("Not that archaic"));
+        retract(a)
+        retract(q)
         insert(new Question("So, something really simple?", answers, new ArrayList<Car>()));
 end
 
 rule "So, something really simple? - Sounds good"
     when
-        q : Question(content.equals("So, something really simple?"));
-        a : UserAnswer(content.equals("Sounds good"));
+        q : Question(content == "So, something really simple?");
+        a : UserAnswer(content == "Sounds good");
     then
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Citroen 2CV"));
         cars.add(new Car("VW Thing"));
         cars.add(new Car("Willys Jeep"));
         cars.add(new Car("Honda Civic"));
+        retract(a)
+        retract(q)
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
@@ -107,6 +113,8 @@ rule "So, something really simple? - More archaic"
     then
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Ford model T"));
+        retract(a)
+        retract(q)
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
@@ -117,6 +125,8 @@ rule "So, something really simple? - Not that archaic"
     then
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Ford model A"));
+        retract(a)
+        retract(q)
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
@@ -140,6 +150,8 @@ rule "Why do you want a classic? - I guess I'm making some kind of statement abo
         answers.add(new UserAnswer("I like being part of a massive automotive subculture"));
         answers.add(new UserAnswer("I hate people knowing what i drive"));
         answers.add(new UserAnswer("I kinda wanted a motorcycle, but i have no balance"));
+        retract(a)
+        retract(q)
         insert(new Question("Great, what kind of statement?", answers, new ArrayList<Car>()));
 end
 
@@ -150,6 +162,8 @@ when
 then
     ArrayList<Car> cars = new ArrayList<>();
     cars.add(new Car("VW type 2 microbus"));
+    retract(a)
+    retract(q)
     insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
@@ -160,6 +174,8 @@ rule "Great, what kind of statement? - The mothership left me in Paris"
    then
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Citroen SM"));
+        retract(a)
+        retract(q)
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
@@ -170,6 +186,8 @@ rule "Great, what kind of statement? - I run an NYC-themed diner in Las Vegas"
     then
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Checker Marathon"));
+        retract(a)
+        retract(q)
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 
@@ -180,5 +198,181 @@ rule "Great, what kind of statement? - I live dangerously and Nader can suck it"
     then
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Chevy Corvair"));
+        retract(a)
+        retract(q)
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
+
+rule "Great, what kind of statement? - I will only drive vehicles with two distinct luggage areas"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I will only drive vehicles with two distinct luggage areas"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("No"));
+        answers.add(new UserAnswer("Yes"));
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("VW type III"));
+        retract(a)
+        retract(q)
+    insert(new Question("Something faster?", answers, cars));
+end
+
+rule "Something faster? - No"
+    when
+        q : Question(content.equals("Something faster?"));
+        a : UserAnswer(content.equals("No"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("VW type III"));
+        retract(a)
+        retract(q)
+    insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Something faster? - Yes"
+    when
+        q : Question(content.equals("Something faster?"));
+        a : UserAnswer(content.equals("Yes"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("No"));
+        answers.add(new UserAnswer("Yes"));
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Porsche 914"));
+        retract(a)
+        retract(q)
+    insert(new Question("Even faster?", answers, cars));
+end
+
+rule "Even faster? - No"
+    when
+        q : Question(content.equals("Even faster?"));
+        a : UserAnswer(content.equals("No"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+                cars.add(new Car("Porsche 914"));
+        retract(a)
+        retract(q)
+    insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Even faster? - Yes"
+    when
+        q : Question(content.equals("Even faster?"));
+        a : UserAnswer(content.equals("Yes"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("De Tomaso Mangusta"));
+        retract(a)
+        retract(q)
+    insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - I'm a kook. An american kook."
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I'm a kook. An american kook."));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("AMC AMX"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - I take driving seriously and have the gloves to prove it"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I take driving seriously and have the gloves to prove it"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Porsche 911"));
+    cars.add(new Car("BMW E30"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - My wallet is on a chain"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("My wallet is on a chain"));
+    then
+        ArrayList<UserAnswer> answers = new ArrayList<>();
+        answers.add(new UserAnswer("Yes"));
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Ford Falcon"));
+        cars.add(new Car("Plymouth Valiant"));
+        retract(a)
+        retract(q)
+        insert(new Question("Not for style, I'm tired of losing it", answers, cars));
+end
+
+rule "Not for style, I'm tired of losing it - Yes"
+    when
+        q : Question(content.equals("Not for style, I'm tired of losing it"));
+        a : UserAnswer(content.equals("Yes"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Rambler American"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - I'm a refugee from an alternate future with zeppelins and shit"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I'm a refugee from an alternate future with zeppelins and shit"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Tatra T87"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - I like being part of a massive automotive subculture"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I like being part of a massive automotive subculture"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("VW Beetle"));
+        cars.add(new Car("BMW 2002"));
+        cars.add(new Car("MGB"));
+        cars.add(new Car("Datsun 240Z"));
+        cars.add(new Car("Volvo 240"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - I hate people knowing what i drive"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I hate people knowing what i drive"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Sterling 825"));
+        cars.add(new Car("Mitsubishi Starion"));
+        cars.add(new Car("Isuzu I-Mark"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+rule "Great, what kind of statement? - I kinda wanted a motorcycle, but i have no balance"
+    when
+        q : Question(content.equals("Great, what kind of statement?"));
+        a : UserAnswer(content.equals("I kinda wanted a motorcycle, but i have no balance"));
+    then
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Lotus 7"));
+        retract(a)
+        retract(q)
+        insert(new Question("", new ArrayList<UserAnswer>(), cars));
+end
+
+// New cars have no soul - branch 3/5
