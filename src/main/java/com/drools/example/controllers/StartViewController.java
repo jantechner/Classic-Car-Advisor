@@ -17,12 +17,8 @@ public class StartViewController {
     @FXML
     private AnchorPane pane;
 
-    @FXML
-    private Label questionContent;
     public void runAdvisor() {
-
         System.out.println("Start button pressed");
-
 
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
@@ -36,6 +32,5 @@ public class StartViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -27,29 +27,13 @@ rule "Init"
 end
 
 
-
-
-
 rule "Show question with possible answers"
     when
         q : Question();
-        qvc : QuestionViewController();
+        guiController : QuestionViewController();
     then
-//        QuestionViewController.updateQuestion(q);
-//        System.out.println("Q: " + q.content + "\n");
-//        for (UserAnswer answer: q.answers){
-//            System.out.println(answer.content);
-//        }
-        qvc.updateLabel(q);
-
-//        UserAnswer ua = new UserAnswer("Reliability and convenience bore me");
-//        UserAnswer ua1 = new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders");
-//        insertLogical(ua);
-//        insertLogical(ua1);
+        guiController.updateQuestion(q);
 end
-
-
-
 
 
 // Reliability and convenience bore me - branch 1/5
@@ -62,8 +46,8 @@ rule "Why do you want a classic? - Reliability and convenience bore me"
         ArrayList<UserAnswer> answers = new ArrayList<>();
         answers.add(new UserAnswer("I want to know how cars work"));
         answers.add(new UserAnswer("I'm erotically drawn to tow trucks and freeway shoulders"));
-//        retract(a)
-//        retract(q)
+        retract(a)
+        retract(q)
         insert(new Question("Oh yeah? Why's that?", answers, new ArrayList<Car>()));
 end
 
@@ -76,8 +60,8 @@ rule "Oh yeah? Why's that? - I'm erotically drawn to tow trucks and freeway shou
         answers.add(new UserAnswer("Also really lovely"));
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(new Car("Lotus Elan"));
-//        retract(a)
-//        retract(q)
+        retract(a)
+        retract(q)
         insert(new Question("Ok. Should it be pretty quick?", answers, cars));
 end
 
@@ -87,7 +71,7 @@ rule "Ok. Should it be pretty quick? - Also really lovely"
         a : UserAnswer(content.equals("Also really lovely"));
     then
         ArrayList<Car> cars = new ArrayList<>();
-        cars.add(new Car("ALfa Romeo Giulia Super"));
+        cars.add(new Car("Alfa Romeo Giulia Super"));
         insert(new Question("", new ArrayList<UserAnswer>(), cars));
 end
 

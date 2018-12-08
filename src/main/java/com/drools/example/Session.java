@@ -15,13 +15,15 @@ public class Session {
         BasicConfigurator.configure();
         KieContainer kContainer = ks.getKieClasspathContainer();
         Session.session = kContainer.newKieSession("ksession-rules");
-
-//        QuestionViewController questionViewController = new QuestionViewController();
-//        session.insert(questionViewController);
     }
 
     public static void insertController(QuestionViewController questionViewController){
         session.insert(questionViewController);
+    }
+
+    public static void insertAnswer(UserAnswer answer){
+        session.insert(answer);
+        session.fireAllRules();
     }
 
 }
